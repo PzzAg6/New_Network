@@ -66,8 +66,13 @@ def SPREAD(MULTI_NT, Seed_Nodes, Beta, MAX_UNCHANGE_TIME):
         if TIME == MULTI_NT[Layer].nodes[init]['INFECTED_TIME']:
             #statics for unchange:
             #注意长度为零的情况，如果退化了咋整
-            Test_Change_Rate_L0 = abs((len(TIME_LAYER_LIST[TIME][0]) - len(TIME_LAYER_LIST[TIME - 1][0])))/len(TIME_LAYER_LIST[TIME - 1][0])
-            Test_Change_Rate_L1 = abs((len(TIME_LAYER_LIST[TIME][1]) - len(TIME_LAYER_LIST[TIME - 1][1])))/len(TIME_LAYER_LIST[TIME - 1][1])
+            Test_Change_Rate_L0 = 0.0
+            Test_Change_Rate_L1 = 0.0
+            if len(TIME_LAYER_LIST[TIME - 1][0]) != 0:
+                Test_Change_Rate_L0 = abs((len(TIME_LAYER_LIST[TIME][0]) - len(TIME_LAYER_LIST[TIME - 1][0])))/len(TIME_LAYER_LIST[TIME - 1][0])
+            if len(TIME_LAYER_LIST[TIME - 1][1]) != 0:
+                Test_Change_Rate_L1 = abs((len(TIME_LAYER_LIST[TIME][1]) - len(TIME_LAYER_LIST[TIME - 1][1])))/len(TIME_LAYER_LIST[TIME - 1][1])
+                
             if(Test_Change_Rate_L0 <= Unchange_Ratio and TIME >= 1):
                 UNCHANGE_TIME_LAYER[0] += 1
             else:
@@ -467,16 +472,16 @@ if __name__ == '__main__':
     Input_Filename = "100Hundred6_2_12_21"#指定的文件夹名称
     smp_inf = "2smp"#不用改
     ROOT_NAME = os.getcwd()
-    NETWORK_PATH = ROOT_NAME + '/' + Input_Filename
+    NETWORK_PATH = ROOT_NAME + '/' + Input_Filename#不需要设置
     NAME_NT = lambda x: x + '.nt'
-    Infected_Layer_L1 = 0
-    Infected_Layer_L2 = 1
+    Infected_Layer_L1 = 0#不需要设置
+    Infected_Layer_L2 = 1#不需要设置
     Random_Gen_Ratio = 0.05#随机节点的比例 N_NODES * Random_Gen_Ratio
     Forget_Rate = [0.3, 0.3]#mu_X, mu_Y,自行指定
     MAX_UNCHANGE_TIME = 30
     Unchange_Ratio = 0.2#波动比例
     Beta_Step = 0.3#每次改变beta的步长
-    Para_Dict = ['layer', 'simplex', 'state']#不需要改变
+    Para_Dict = ['layer', 'simplex', 'state']#不需要设置
 
 
 
